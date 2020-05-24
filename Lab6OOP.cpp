@@ -5,11 +5,11 @@
 #include <iostream>
 #include <Windows.h>
 #include <atlstr.h>
-#include "Controller.cpp"
 #include <sstream>
 #include <string>
 #include <cassert>
 #include "Validation.cpp"
+#include "HTML.cpp"
 
 using namespace std;
 
@@ -41,6 +41,7 @@ int main()
 	string mode, genre, title;
 	int option, year, likes;
 	Validation ok;
+	string format;
 	cout << "WELCOME! \n";
 	cout << endl << "Bored in the house? Well now you're in the right place! Let's get it started!" << endl << "You can..." << endl;
 
@@ -49,6 +50,8 @@ int main()
 		cin >> mode;
 		if (ok.ValidMode(mode)==1) {
 			cout << endl << "You entered the User mode" << endl;
+			cout << "Choose a format to see your watchlist (html or csv)";
+			cin >> format;
 			while (true) {
 				cout << endl << "1. Search movies by genre and add some in your watchlist" << endl << \
 					"2. Delete the movie you already saw" << endl << \
@@ -75,8 +78,16 @@ int main()
 				}
 				else if (option == 3) {
 					cout << endl << "Your watchlist:" << endl;
-					cont.show_watchlist();
-					cout << endl;
+					if (format == "html") {
+						//wenn der Format html ist, wird die Liste in html geoffnet
+						HTML h;
+						h.maketablehtml(cont.repo.watchlist);
+					}
+					else {
+						//aici Cris
+						cont.show_watchlist();
+						cout << endl;
+					}
 				}
 				else if (option == 4) {
 					cout << endl << "All movies:" << endl;
