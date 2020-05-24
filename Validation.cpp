@@ -48,4 +48,14 @@ public:
 		}
 		return 0;
 	}
+	void ValidFormat(string& format) {
+		//Uberpruft ob das Jahr gultig ist = Datenvalidierung
+		while (format!="HTML"&&format!="html"&&format != "Html"&&format!="csv"&&format!="CSV"&&format != "Csv") {
+			cin.clear();
+			cin.ignore(256, '\n');
+			cout << "This Format ist invalid. Please choose between html and csv.\n";
+			cout << "Format: ";
+			cin >> format;
+		}
+	}
 };

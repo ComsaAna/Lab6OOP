@@ -9,32 +9,48 @@
 #include <string>
 #include <cassert>
 #include "Validation.cpp"
-#include "HTML.cpp"
+//#include "HTML.cpp"
+#include "Tests.cpp"
 
 using namespace std;
 
-void Teste() {
+void savefile(string format,string &filename) {
+	string newExt; //new extension
+	HTML h;
 	Controller cont;
-	cont.repo.create_list();
-	assert(cont.repo.length == 10);
-	assert(cont.repo.wlen == 0);
-	Movie m1("a", "a", 2000, 10, "https://www.google.ro/?gws_rd=ssl");
-	Movie m2("b", "b", 2001, 9, "https://www.youtube.com/");
-	cont.repo.add_movie(m1, "admin");
-	cont.repo.add_movie(m2, "admin");
-	assert(cont.repo.length == 12);
-	cont.repo.add_movie(m1, "user");
-	cont.repo.add_movie(m2, "user");
-	assert(cont.repo.wlen == 2);
-	cont.repo.delete_movie_watchlist("a", 2000);
-	assert(cont.repo.wlen == 1);
-	cont.repo.delete_movie_list("b", 2001);
-	assert(cont.repo.length == 11);
+	if (format == "html" || format == "HTML" || format == "Html") {
+		//wir verandern das Format
+		//htm, nicht html, weil in Visual Studio die Extension so heisst
+		newExt = "htm";
+		//wir finden die vorige Extension
+		string::size_type i = filename.rfind('.', filename.length());
+		if (i != string::npos) {
+			filename.replace(i + 1, newExt.length(), newExt);
+		}
+		h.maketablehtml(cont.repo.watchlist, cont.repo.wlen, filename);
+	}
+	else if (format == "csv" || format == "CSV" || format == "Csv") {
+		//aici tot Crisssssss: pare ca se schimba formatul fisierului ca asa trebuia, dar nu prea merge si 
+		//nu am gasit cum sa fac, dar am incercat. Tu poti sa iti faci ca mine un fisier care se numeste tot 
+		//Watchliste dar sa fie .csv si asa merge si poate nu isi da seama profa:))))
+		//Deci functia asta e ca sa para ca am facut si asta
+		//deci aici trebuie doar sa ma pui o functie cum e la mine maketablehtml care iti contruieste fisierul
+		//csv din vectorul watchist
+		//Apropo am folosit Vererbung, deci mai trebuie folosit doar Polymorphismus
+		//cred ca il poti folosi cand faci functia aia care sa iti dechida ba in notepad, ba in Excel...
+		//sa stergi comentariu asta dupa ;)
+		newExt = "csv";
+		string::size_type i = filename.rfind('.', filename.length());
+		if (i != string::npos) {
+			filename.replace(i + 1, newExt.length(), newExt);
+		}
+	}
 }
 
 int main()
 {
-	// Teste();
+//	Tests t;
+//	t.Teste();
 	Controller cont;
 	cont.repo.create_list();
 	CString url;
@@ -50,8 +66,11 @@ int main()
 		cin >> mode;
 		if (ok.ValidMode(mode)==1) {
 			cout << endl << "You entered the User mode" << endl;
-			cout << "Choose a format to see your watchlist (html or csv)";
+			cout << "Choose a format to see your watchlist (html or csv)\nFormat: ";
 			cin >> format;
+			ok.ValidFormat(format);
+			string filename = "watchlistfile.txt";
+			savefile(format, filename);
 			while (true) {
 				cout << endl << "1. Search movies by genre and add some in your watchlist" << endl << \
 					"2. Delete the movie you already saw" << endl << \
@@ -81,12 +100,13 @@ int main()
 					if (format == "html") {
 						//wenn der Format html ist, wird die Liste in html geoffnet
 						HTML h;
-						h.maketablehtml(cont.repo.watchlist);
+						h.executehtml(cont.repo.watchlist,cont.repo.wlen);
 					}
 					else {
 						//aici Cris
-						cont.show_watchlist();
-						cout << endl;
+						//cont.show_watchlist();
+						//cout << endl;
+						//functia ta de deschidere a listei in notepad...
 					}
 				}
 				else if (option == 4) {
