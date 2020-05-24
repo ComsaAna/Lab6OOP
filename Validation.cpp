@@ -15,6 +15,7 @@ public:
 		while (!valid.YearExcept(year) || year < 1800 || year>2020) {
 			cin.clear();
 			cin.ignore(256, '\n');
+			cout << "This Year ist invalid. Please choose a valid Year.\n";
 		}
 	}
 
@@ -25,6 +26,7 @@ public:
 		while (!valid.LikeExcept(likes) || likes < 0) {
 			cin.clear();
 			cin.ignore(256, '\n');
+			cout << "This number of Likes ist invalid. Please choose a valid number of Likes.\n";
 		}
 	}
 
@@ -33,6 +35,7 @@ public:
 		while (!valid.OptionExcept(option) || option <= 0 || option >= 7) {
 			cin.clear();
 			cin.ignore(256, '\n');
+			cout << "This Option ist invalid. Please choose a valid option.\n";
 		}
 	}
 

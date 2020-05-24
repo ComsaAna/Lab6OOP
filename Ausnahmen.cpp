@@ -36,7 +36,7 @@ public:
 		}
 		catch(...) {
 			//sie kommt hier durch die geworfene Exception an und schreibt das auf dem Bildschirm an
-			cout << "Oh no...An exception occured. Please enter a valid number of Likes\n";
+			cout << "Oh no...An exception occured...\n";
 			return false;
 		}
 		return true;
@@ -54,7 +54,7 @@ public:
 		}
 		catch (...) {
 			//sie kommt hier durch die geworfene Exception an und schreibt das auf dem Bildschirm an
-			cout << "Oh no...An exception occured. Please enter a valid year\n";
+			cout << "Oh no...An exception occured...\n";
 			return false;
 		}
 		return true;
@@ -72,7 +72,7 @@ public:
 		}
 		catch (int e) {
 			//sie kommt hier durch die geworfene Exception an und schreibt das auf dem Bildschirm an
-			cout << "Oh no...An exception occured. Please type a valid option\n";
+			cout << "Oh no...An exception occured...\n";
 			return false;
 		}
 		return true;
