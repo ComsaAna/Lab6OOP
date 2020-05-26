@@ -14,10 +14,12 @@ void MovieInMemoryRepo::read(string mode) {
 	char x;
 	if (mode == "admin") {
 		f.open("movies.txt", ios::in);
+		//field_count - to see if the word a title/genre/year/.... is
 		int field_count = 0, movie_counter = 0;
 		Movie movie;
 		while (!f.eof()) {
-
+			// read character by character until the "," or "\n" and concatenate them into a word (CString)
+			// => read word by word
 			x = f.get();
 			while (x != ',' && x != '\n' && !f.eof()) {
 				word += x;
@@ -26,6 +28,7 @@ void MovieInMemoryRepo::read(string mode) {
 
 			if (x == ',') {
 				if (field_count == 0) {
+					//convert into string
 					string str(CW2A(word.GetString()));
 					movie.setTitle(str);
 				}
@@ -34,6 +37,7 @@ void MovieInMemoryRepo::read(string mode) {
 					movie.setGenre(str);
 				}
 				else if (field_count == 2) {
+					//convert into int
 					int x = _ttoi(word);
 					movie.setYear(x);
 				}
