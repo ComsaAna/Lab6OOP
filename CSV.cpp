@@ -37,14 +37,9 @@ public:
 		vector<string> v5;
 		//populate table with data from watchlist
 		for (int i = 0; i < len; i++) {
-			//CString cstr(word.c_str());
 			v1.push_back(w_list[i].getTitle());
 			v2.push_back(w_list[i].getGenre());
-			//n = repository.watchlist[i].getYear();
-			//str = to_string(n);
 			v3.push_back(to_string(w_list[i].getYear()));
-			//n = repository.watchlist[i].getLikes();
-			//str = to_string(n);
 			v4.push_back(to_string(w_list[i].getLikes()));
 			wstring ws(w_list[i].getTrailer());
 			string s = string(ws.begin(), ws.end());
