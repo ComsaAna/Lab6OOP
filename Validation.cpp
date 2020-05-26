@@ -10,7 +10,7 @@ public:
 public:
 	Validation() {
 	}
-	void ValidYear(int &year) {
+	void ValidYear(int& year) {
 		//Uberpruft ob das Jahr gultig ist = Datenvalidierung
 		while (!valid.YearExcept(year) || year < 1800 || year>2020) {
 			cin.clear();
@@ -19,10 +19,10 @@ public:
 		}
 	}
 
-	void ValidLikes(int &likes) {
+	void ValidLikes(int& likes) {
 		cout << "Likes: ";
 		cin >> likes;
-		//Uberpruft ob das Jahr gultig ist = Datenvalidierung
+		//Uberpruft ob die Likes gultig sind = Datenvalidierung
 		while (!valid.LikeExcept(likes) || likes < 0) {
 			cin.clear();
 			cin.ignore(256, '\n');
@@ -30,7 +30,7 @@ public:
 		}
 	}
 
-	void ValidOption(int &option) {
+	void ValidOption(int& option) {
 		//Uberpruft ob die Option ein Integer ist = Datenvalidierung
 		while (!valid.OptionExcept(option) || option <= 0 || option >= 7) {
 			cin.clear();
@@ -50,7 +50,7 @@ public:
 	}
 	void ValidFormat(string& format) {
 		//Uberpruft ob das Jahr gultig ist = Datenvalidierung
-		while (format!="HTML"&&format!="html"&&format != "Html"&&format!="csv"&&format!="CSV"&&format != "Csv") {
+		while (format != "HTML" && format != "html" && format != "Html" && format != "csv" && format != "CSV" && format != "Csv") {
 			cin.clear();
 			cin.ignore(256, '\n');
 			cout << "This Format ist invalid. Please choose between html and csv.\n";

@@ -3,7 +3,7 @@
 #include "HTML.cpp"
 
 using namespace std;
-
+/*
 class Tests {
 public:
 	Tests() {
@@ -28,4 +28,4 @@ public:
 		cont.repo.delete_movie_list("b", 2001);
 		assert(cont.repo.length == 11);
 	}
-};
+};*/

@@ -24,7 +24,7 @@ public:
 	Exceptions() {
 	}
 
-	bool LikeExcept(int &likes) {
+	bool LikeExcept(int& likes) {
 		//Exception fur Likes
 		try {
 			//uberpruft ob die Anzahl der Likes ein Integer ist
@@ -34,7 +34,7 @@ public:
 				//sonst wirft sie ein Exception
 				throw except.myexception();
 		}
-		catch(...) {
+		catch (...) {
 			//sie kommt hier durch die geworfene Exception an und schreibt das auf dem Bildschirm an
 			cout << "Oh no...An exception occured...\n";
 			return false;
@@ -42,7 +42,7 @@ public:
 		return true;
 	}
 
-	bool YearExcept(int &year) {
+	bool YearExcept(int& year) {
 		//Exception fur das Jahr
 		try {
 			//uberpruft ob das Jahr ein Integer ist
@@ -60,13 +60,13 @@ public:
 		return true;
 	}
 
-	bool OptionExcept(int &option) {
+	bool OptionExcept(int& option) {
 		//Exception fur die Option, die man eingibt
 		try {
 			//uberpruft ob die Option ein Integer ist
 			cout << "Your option= ";
 			cin >> option;
-			if(cin.fail())
+			if (cin.fail())
 				//sonst wirft sie ein Exception
 				throw except.myexception();
 		}
@@ -78,4 +78,3 @@ public:
 		return true;
 	}
 };
-

@@ -10,7 +10,7 @@
 
 using namespace std;
 
-class HTML:Controller {
+class HTML :Controller {
 	//Vererbt von dem Controller alle Funktionen und Variablen
 
 public:
@@ -27,9 +27,9 @@ public:
 			text.append(" ");
 	}
 
-	void maketablehtml(Movie m[100],int len,string s) {
+	void maketablehtml(Movie m[100], int len, string s) {
 		//wir erzeugen die Tabelle in html
-		string chars[5] = { "Title", "Genre", "Jahr", "Likes", "Trailer Link"};
+		string chars[5] = { "Title", "Genre", "Jahr", "Likes", "Trailer Link" };
 		int headgap = 3;
 		int bodygap = 3;
 		int tablegap = 6;
@@ -91,8 +91,8 @@ public:
 	}
 
 	void executehtml(Movie m[100], int len) {
-		string s="Watchlist.htm";
-		maketablehtml(m,len,s);
+		string s = "Watchlist.htm";
+		maketablehtml(m, len, s);
 		CString strWebPage;
 		strWebPage = "Watchliste.htm";
 		//wir offnen im Browser die erzeugte Tabelle
