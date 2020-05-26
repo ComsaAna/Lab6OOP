@@ -20,8 +20,6 @@ public:
 	}
 
 	void ValidLikes(int& likes) {
-		cout << "Likes: ";
-		cin >> likes;
 		//Uberpruft ob die Likes gultig sind = Datenvalidierung
 		while (!valid.LikeExcept(likes) || likes < 0) {
 			cin.clear();
