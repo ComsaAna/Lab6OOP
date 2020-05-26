@@ -2,6 +2,7 @@
 //
 
 
+
 #include <iostream>
 #include <Windows.h>
 #include <atlstr.h>
@@ -9,12 +10,15 @@
 #include <string>
 #include <cassert>
 #include "Validation.cpp"
+#include "MovieInMemoryRepo.h"
 //#include "HTML.cpp"
 #include "Tests.cpp"
+#include "CSV.cpp"
 
 using namespace std;
 
-void savefile(string format,string &filename) {
+
+void savefile(string format, string& filename) {
 	string newExt; //new extension
 	HTML h;
 	Controller cont;
@@ -27,7 +31,7 @@ void savefile(string format,string &filename) {
 		if (i != string::npos) {
 			filename.replace(i + 1, newExt.length(), newExt);
 		}
-		h.maketablehtml(cont.repo.watchlist, cont.repo.wlen, filename);
+		h.maketablehtml(cont.repository.repo.watchlist, cont.repository.repo.wlen, filename);
 	}
 	else if (format == "csv" || format == "CSV" || format == "Csv") {
 		//aici tot Crisssssss: pare ca se schimba formatul fisierului ca asa trebuia, dar nu prea merge si 
@@ -39,20 +43,21 @@ void savefile(string format,string &filename) {
 		//Apropo am folosit Vererbung, deci mai trebuie folosit doar Polymorphismus
 		//cred ca il poti folosi cand faci functia aia care sa iti dechida ba in notepad, ba in Excel...
 		//sa stergi comentariu asta dupa ;)
-		newExt = "csv";
+		/*newExt = "csv";
 		string::size_type i = filename.rfind('.', filename.length());
 		if (i != string::npos) {
 			filename.replace(i + 1, newExt.length(), newExt);
-		}
+		}*/
 	}
 }
 
 int main()
 {
-//	Tests t;
-//	t.Teste();
+	//	Tests t;
+	//	t.Teste();
 	Controller cont;
-	cont.repo.create_list();
+	cont.repository.repo.read("admin");
+	cont.repository.repo.read("user");
 	CString url;
 	string mode, genre, title;
 	int option, year, likes;
@@ -64,7 +69,7 @@ int main()
 	while (true) {
 		cout << "\nChoose a mode:" << endl << "User/Admin: ";
 		cin >> mode;
-		if (ok.ValidMode(mode)==1) {
+		if (ok.ValidMode(mode) == 1) {
 			cout << endl << "You entered the User mode" << endl;
 			cout << "Choose a format to see your watchlist (html or csv)\nFormat: ";
 			cin >> format;
@@ -93,25 +98,24 @@ int main()
 					cin.get();
 					getline(cin, title, '\n');
 					ok.ValidYear(year);
-					cont.repo.delete_movie_watchlist(title, year);
+					cont.repository.delete_movie_watchlist(title, year);
 				}
 				else if (option == 3) {
 					cout << endl << "Your watchlist:" << endl;
 					if (format == "html") {
 						//wenn der Format html ist, wird die Liste in html geoffnet
 						HTML h;
-						h.executehtml(cont.repo.watchlist,cont.repo.wlen);
+						h.executehtml(cont.repository.repo.watchlist, cont.repository.repo.wlen);
 					}
 					else {
-						//aici Cris
-						//cont.show_watchlist();
-						//cout << endl;
-						//functia ta de deschidere a listei in notepad...
+						CSV csv;
+						csv.csv_file(cont.repository.repo.watchlist, cont.repository.repo.wlen);
+						cout << endl << "A csv file with the name \"\Watchlist.csv\"\ was created. You can search it in your folder and see your watchlist!" << endl;
 					}
 				}
 				else if (option == 4) {
 					cout << endl << "All movies:" << endl;
-					cont.repo.show_movies();
+					cont.repository.show_movies();
 					cout << endl;
 				}
 				else if (option == 5) {
@@ -125,7 +129,7 @@ int main()
 			}
 		}
 
-		else if (ok.ValidMode(mode)==2) {
+		else if (ok.ValidMode(mode) == 2) {
 			cout << endl << "You entered the Administrator mode" << endl;
 			while (true) {
 				cout << endl << "1. Add a new movie to the movielist" << endl << \
@@ -149,7 +153,7 @@ int main()
 					cin >> myString;
 					url = CString(myString);
 					Movie m(title, genre, year, likes, url);
-					cont.repo.add_movie(m, "admin");
+					cont.repository.add_movie(m, "admin");
 				}
 				else if (option == 2) {
 					cout << endl << "Delete movies" << endl << \
@@ -158,7 +162,7 @@ int main()
 					cin.get();
 					getline(cin, title, '\n');
 					ok.ValidYear(year);
-					cont.repo.delete_movie_list(title, year);
+					cont.repository.delete_movie_list(title, year);
 				}
 				else if (option == 3) {
 					string edit_opt;
@@ -170,11 +174,11 @@ int main()
 					ok.ValidYear(year);
 					cout << "Edit option: ";
 					cin >> edit_opt;
-					cont.repo.edit_movie(title, year, edit_opt);
+					cont.repository.edit_movie(title, year, edit_opt);
 				}
 				else if (option == 4) {
 					cout << endl << "Your Movielist:" << endl;
-					cont.repo.show_movies();
+					cont.repository.show_movies();
 					cout << endl;
 				}
 				else if (option == 5) {
