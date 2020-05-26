@@ -34,15 +34,10 @@ void MovieInMemoryRepo::read(string mode) {
 					movie.setGenre(str);
 				}
 				else if (field_count == 2) {
-					//stringstream convert_to_int(word);
 					int x = _ttoi(word);
-					//convert_to_int >> x;
 					movie.setYear(x);
 				}
 				else if (field_count == 3) {
-					//stringstream convert_to_int(word);
-					//int x = 0;
-					//convert_to_int >> x;
 					int x = _ttoi(word);
 					movie.setLikes(x);
 				}
@@ -51,7 +46,6 @@ void MovieInMemoryRepo::read(string mode) {
 
 			else if (x == '\n' || f.eof()) {
 				field_count = 0;
-				//CString cstr(word.c_str());
 				movie.setTrailer(word);
 				movies[movie_counter] = movie;
 				movie_counter++;
@@ -84,16 +78,10 @@ void MovieInMemoryRepo::read(string mode) {
 					movie.setGenre(str);
 				}
 				else if (field_count == 2) {
-					//stringstream convert_to_int(word);
-					//int x = 0;
-					//convert_to_int >> x;
 					int x = _ttoi(word);
 					movie.setYear(x);
 				}
 				else if (field_count == 3) {
-					//stringstream convert_to_int(word);
-					//int x = 0;
-					//convert_to_int >> x;
 					int x = _ttoi(word);
 					movie.setLikes(x);
 				}
@@ -102,7 +90,6 @@ void MovieInMemoryRepo::read(string mode) {
 
 			else if (x == '\n' || f.eof()) {
 				field_count = 0;
-				//CString cstr(word.c_str());
 				movie.setTrailer(word);
 				watchlist[movie_counter] = movie;
 				movie_counter++;
