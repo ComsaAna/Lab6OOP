@@ -1,8 +1,6 @@
 // lab6OOP.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-
-
 #include <iostream>
 #include <Windows.h>
 #include <atlstr.h>
@@ -33,28 +31,12 @@ void savefile(string format, string& filename) {
 		}
 		h.maketablehtml(cont.repository.repo.watchlist, cont.repository.repo.wlen, filename);
 	}
-	else if (format == "csv" || format == "CSV" || format == "Csv") {
-		//aici tot Crisssssss: pare ca se schimba formatul fisierului ca asa trebuia, dar nu prea merge si 
-		//nu am gasit cum sa fac, dar am incercat. Tu poti sa iti faci ca mine un fisier care se numeste tot 
-		//Watchliste dar sa fie .csv si asa merge si poate nu isi da seama profa:))))
-		//Deci functia asta e ca sa para ca am facut si asta
-		//deci aici trebuie doar sa ma pui o functie cum e la mine maketablehtml care iti contruieste fisierul
-		//csv din vectorul watchist
-		//Apropo am folosit Vererbung, deci mai trebuie folosit doar Polymorphismus
-		//cred ca il poti folosi cand faci functia aia care sa iti dechida ba in notepad, ba in Excel...
-		//sa stergi comentariu asta dupa ;)
-		/*newExt = "csv";
-		string::size_type i = filename.rfind('.', filename.length());
-		if (i != string::npos) {
-			filename.replace(i + 1, newExt.length(), newExt);
-		}*/
-	}
 }
 
 int main()
 {
-	//	Tests t;
-	//	t.Teste();
+	//Tests t;
+	//t.Teste(); merg testele, doar ca afiseaza mesaje pe ecran de la functiile respective
 	Controller cont;
 	cont.repository.repo.read("admin");
 	cont.repository.repo.read("user");
@@ -107,7 +89,7 @@ int main()
 						HTML h;
 						h.executehtml(cont.repository.repo.watchlist, cont.repository.repo.wlen);
 					}
-					else {
+					else if (format == "csv") {
 						CSV csv;
 						csv.csv_file(cont.repository.repo.watchlist, cont.repository.repo.wlen);
 						cout << endl << "A csv file with the name \"\Watchlist.csv\"\ was created. You can search it in your folder and see your watchlist!" << endl;
