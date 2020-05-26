@@ -53,7 +53,6 @@ public:
 
 		vector<pair<string, vector<string>>> vals = { {"Title", v1}, {"Genre", v2}, { "Year", v3 }, \
 		{"Likes", v4}, {"Link", v5} };
-		//vector< pair<string, vector<CString>>> url = { {"Link", v5} };
 
 		write_csv("Watchlist.csv", vals);
 
